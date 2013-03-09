@@ -102,10 +102,3 @@ class ParagraphScroller extends NodeScroller {
         super(document.body.getElementsByTagName("p"));
     }
 }
-
-$(document).ready(function () {
-    var scroller = new ParagraphScroller();
-
-    document.onkeyup = e => scroller.handleOnKeyUp(e);
-
-});

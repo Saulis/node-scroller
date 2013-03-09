@@ -21,6 +21,14 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="node-scroller.min.js"></script>
 
+    <script>
+        $(document).ready(function (){
+            var scroller = new ParagraphScroller();
+
+            document.onkeyup = function(e) { scroller.handleOnKeyUp(e) };
+        });
+    </script>
+
     <p id="paragraph1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque aliquam, erat sit amet lacinia euismod, elit felis pellentesque dui, et blandit magna ligula sit amet leo. Proin in cursus purus. Quisque in nisi luctus ante rhoncus adipiscing nec ac urna. Quisque et augue ipsum, eget laoreet nibh. Cras tincidunt risus at risus porttitor semper. Nulla tristique justo quis sem consectetur dignissim. Fusce fermentum, nibh gravida sagittis volutpat, eros eros pretium ante, sed gravida neque tellus non ipsum. Suspendisse ut nisi id ante hendrerit imperdiet et non nibh. Nunc tincidunt egestas ipsum, sed tempus lacus rutrum ac. Phasellus ac pulvinar neque. Integer sit amet accumsan purus. In id dui odio, in ultricies nisl. Proin sit amet massa a libero posuere consequat.</p>
     <p id="paragraph2">Aliquam ac purus non nunc faucibus gravida at id lectus. Phasellus vitae lorem vehicula sapien auctor dapibus. Proin tincidunt pellentesque diam quis aliquam. Proin vel purus quis erat tincidunt vulputate sit amet sed urna. Ut sollicitudin aliquam metus rhoncus fringilla. Mauris est augue, posuere in pulvinar at, ultricies et nisi. Morbi nec quam justo. Quisque porttitor tincidunt nisi, vitae auctor ante tincidunt ut. Vestibulum vel felis lorem. Suspendisse potenti. Fusce aliquam dui ac neque ultrices blandit. Vestibulum diam diam, imperdiet at ultricies ac, feugiat sit amet urna.</p>
     <p id="paragraph3">Aenean tristique nulla ut quam hendrerit varius hendrerit tortor tristique. Aenean nec risus et lectus adipiscing ultrices adipiscing in lorem. Praesent nunc odio, porta a iaculis a, fermentum aliquam nulla. Nulla dignissim rhoncus quam, et ultrices augue dictum quis. In quis enim ac ante convallis sodales. Ut quis tempor lectus. In vel dui in ligula imperdiet dignissim. Integer et mi vel nisi eleifend iaculis. Ut vel metus tortor, et consectetur eros.</p>

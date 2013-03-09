@@ -34,34 +34,45 @@ class NodeScroller {
         return this.current < this.nodeIds.length - 1;
     }
 
-    private currentBottomIsVisible() : bool {
+    private windowBottomIsUnderCurrentNode() : bool {
         var currentNode = this.getCurrentNode();
 
-        var bottom = $(window).scrollTop() + $(window).height();
+        var windowBottomPosition = $(window).scrollTop() + $(window).height();
+        var currentNodeBottomPosition = currentNode.position().top + currentNode.height();
+        var bottomMargin = 100;
 
-        return bottom - 100 > currentNode.position().top + currentNode.height();
+        return windowBottomPosition - bottomMargin > currentNodeBottomPosition;
     }
 
-    private currentTopIsVisible() : bool {
+    private windowTopIsOverCurrentNode() : bool {
         var currentNode = this.getCurrentNode();
 
-        var top = $(window).scrollTop();
+        var windowTopPosition = $(window).scrollTop();
+        var currentNodeTopPosition = currentNode.position().top;
 
-        return top < currentNode.position().top;
+        return windowTopPosition < currentNodeTopPosition;
     }
 
     private getNext() : string {
         return this.nodeIds[++this.current];
     }
 
+    private canScrollToPrevious() : bool {
+        return this.hasPrevious() && this.windowTopIsOverCurrentNode();
+    }
+
+    private canScrollToNext() : bool {
+        return this.hasNext() && this.windowBottomIsUnderCurrentNode();
+    }
+
     scrollToPrevious() {
-        if(this.hasPrevious() && this.currentTopIsVisible()) {
+        if(this.canScrollToPrevious()) {
             this.scrollTo(this.getPrevious());
         }
     }
 
     scrollToNext() {
-        if(this.hasNext() && this.currentBottomIsVisible()) {
+        if(this.canScrollToNext()) {
             this.scrollTo(this.getNext());
         }
     }

@@ -12,19 +12,19 @@ class NodeScroller {
 
     }
 
-    hasPrevious() : bool {
+    private hasPrevious() : bool {
         return this.current > 0;
     }
 
-    getPrevious() : string {
+    private getPrevious() : string {
         return this.nodeIds[--this.current];
     }
 
-    hasNext() : bool {
+    private hasNext() : bool {
         return this.current < this.nodeIds.length - 1;
     }
 
-    getNext() : string {
+    private getNext() : string {
         return this.nodeIds[++this.current];
     }
 
@@ -40,23 +40,32 @@ class NodeScroller {
         }
     }
 
-    scrollTo(id : string) {
+    private scrollTo(id : string) {
         var position = $("#" + id).position().top;
         $(document).scrollTop(position);
     }
-}
 
-$(document).ready(function (){
-    var scroller = new NodeScroller(document.body.getElementsByTagName("p"));
-
-    document.onkeyup = function(e: Event) {
+    handleOnKeyUp(e: Event) {
         switch(e.keyCode) {
             case 40:
-                scroller.scrollToNext();
+                this.scrollToNext();
                 return;
             case 38:
-                scroller.scrollToPrevious();
+                this.scrollToPrevious();
                 return;
         }
     }
+}
+
+class ParagraphScroller extends NodeScroller {
+    constructor () {
+        super(document.body.getElementsByTagName("p"));
+    }
+}
+
+$(document).ready(function () {
+    var scroller = new ParagraphScroller();
+
+    document.onkeyup = e => scroller.handleOnKeyUp(e);
+
 });

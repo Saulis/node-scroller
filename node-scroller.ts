@@ -12,6 +12,12 @@ class NodeScroller {
 
     }
 
+    private getCurrentNode() : JQuery {
+        var currentNodeId = this.nodeIds[this.current];
+
+        return $("#" + currentNodeId);
+    }
+
     private hasPrevious() : bool {
         return this.current > 0;
     }
@@ -24,18 +30,34 @@ class NodeScroller {
         return this.current < this.nodeIds.length - 1;
     }
 
+    private currentBottomIsVisible() : bool {
+        var currentNode = this.getCurrentNode();
+
+        var bottom = $(window).scrollTop() + $(window).height();
+
+        return bottom - 100 > currentNode.position().top + currentNode.height();
+    }
+
+    private currentTopIsVisible() : bool {
+        var currentNode = this.getCurrentNode();
+
+        var top = $(window).scrollTop();
+
+        return top < currentNode.position().top;
+    }
+
     private getNext() : string {
         return this.nodeIds[++this.current];
     }
 
     scrollToPrevious() {
-        if(this.hasPrevious()) {
+        if(this.hasPrevious() && this.currentTopIsVisible()) {
             this.scrollTo(this.getPrevious());
         }
     }
 
     scrollToNext() {
-        if(this.hasNext()) {
+        if(this.hasNext() && this.currentBottomIsVisible()) {
             this.scrollTo(this.getNext());
         }
     }
@@ -50,10 +72,10 @@ class NodeScroller {
 
     handleOnKeyUp(e: Event) {
         switch(e.keyCode) {
-            case 40:
+            case 40: //arrow down
                 this.scrollToNext();
                 return;
-            case 38:
+            case 38: //arrow up
                 this.scrollToPrevious();
                 return;
         }

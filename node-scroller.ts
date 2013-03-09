@@ -12,10 +12,14 @@ class NodeScroller {
 
     }
 
+    private getNode(id: string) : JQuery {
+        return $("#" + id);
+    }
+
     private getCurrentNode() : JQuery {
         var currentNodeId = this.nodeIds[this.current];
 
-        return $("#" + currentNodeId);
+        return this.getNode(currentNodeId);
     }
 
     private hasPrevious() : bool {
@@ -63,7 +67,7 @@ class NodeScroller {
     }
 
     private scrollTo(id : string) {
-        var position = $("#" + id).position().top;
+        var position = this.getNode(id).position().top;
 
         $(document.body).animate({
            scrollTop:   position

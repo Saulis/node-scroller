@@ -13,7 +13,7 @@ class NodeScroller {
     }
 
     hasPrevious() : bool {
-        return this.current == 0;
+        return this.current > 0;
     }
 
     getPrevious() : string {
@@ -49,7 +49,14 @@ class NodeScroller {
 $(document).ready(function (){
     var scroller = new NodeScroller(document.body.getElementsByTagName("p"));
 
-    document.onkeyup = function() {
-        scroller.scrollToNext();
+    document.onkeyup = function(e: Event) {
+        switch(e.keyCode) {
+            case 40:
+                scroller.scrollToNext();
+                return;
+            case 38:
+                scroller.scrollToPrevious();
+                return;
+        }
     }
 });

@@ -42,7 +42,10 @@ class NodeScroller {
 
     private scrollTo(id : string) {
         var position = $("#" + id).position().top;
-        $(document).scrollTop(position);
+
+        $(document.body).animate({
+           scrollTop:   position
+        }, 250);
     }
 
     handleOnKeyUp(e: Event) {

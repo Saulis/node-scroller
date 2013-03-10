@@ -20,12 +20,20 @@
 <body>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="node-scroller.min.js"></script>
+    <script type="text/javascript" src="https://raw.github.com/brandonaaron/jquery-mousewheel/master/jquery.mousewheel.js"></script>
 
     <script>
         $(document).ready(function (){
             var scroller = new ParagraphScroller();
 
-            document.onkeyup = function(e) { scroller.handleOnKeyUp(e) };
+            $(window).onkeyup = function(e) { scroller.handleOnKeyUp(e) };
+            $(window).mousewheel(function(event, delta, deltaX, deltaY) {
+                if(deltaY > 0) {
+                    scroller.scrollToPrevious();
+                } else if(deltaY < 0) {
+                    scroller.scrollToNext();
+                }
+            });
         });
     </script>
 

@@ -4,6 +4,7 @@
 class NodeScroller {
     private current = 0;
     private nodeIds = [];
+    public nodeMargin = 100;
 
     constructor(nodes : NodeList) {
         for(var i = 0; i < nodes.length; i++) {
@@ -39,9 +40,8 @@ class NodeScroller {
 
         var windowBottomPosition = $(window).scrollTop() + $(window).height();
         var currentNodeBottomPosition = currentNode.position().top + currentNode.height();
-        var bottomMargin = 100;
 
-        return windowBottomPosition - bottomMargin > currentNodeBottomPosition;
+        return windowBottomPosition - this.nodeMargin > currentNodeBottomPosition;
     }
 
     private windowTopIsOverCurrentNode() : bool {
@@ -81,7 +81,7 @@ class NodeScroller {
         var position = this.getNode(id).position().top;
 
         $(document.body).animate({
-           scrollTop:   position
+           scrollTop:   position - this.nodeMargin
         }, 250);
     }
 

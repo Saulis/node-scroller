@@ -4,6 +4,8 @@
 class NodeScroller {
     private current = 0;
     private nodeIds = [];
+    private previousWindowTop = 0;
+    private scrolling = false;
 
     constructor(nodes : NodeList) {
         for(var i = 0; i < nodes.length; i++) {
@@ -93,6 +95,29 @@ class NodeScroller {
             case 38: //arrow up
                 this.scrollToPrevious();
                 return;
+        }
+    }
+
+    handleOnScroll(e: Event) {
+
+        if(this.scrolling) {
+            return;
+        } else {
+
+        this.scrolling = true;
+
+        var currentWindowTop = $(window).scrollTop();
+
+        if(currentWindowTop > this.previousWindowTop)
+        {
+            this.scrollToNext();
+        } else if(currentWindowTop < this.previousWindowTop)
+        {
+            this.scrollToPrevious();
+        }
+
+        this.previousWindowTop = $(window).scrollTop();
+        this.scrolling = false;
         }
     }
 }

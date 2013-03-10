@@ -19,13 +19,14 @@
 </head>
 <body>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="node-scroller.min.js"></script>
+    <script type="text/javascript" src="node-scroller.js"></script>
 
     <script>
         $(document).ready(function (){
             var scroller = new ParagraphScroller();
 
-            document.onkeyup = function(e) { scroller.handleOnKeyUp(e) };
+            //document.onkeyup = function(e) { scroller.handleOnKeyUp(e) };
+            window.onscroll = function(e) { scroller.handleOnScroll(e) };
         });
     </script>
 
